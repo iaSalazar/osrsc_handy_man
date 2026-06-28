@@ -4,17 +4,17 @@ variants:
 - bbox:
   - 0
   - 0
-  - 40
-  - 40
+  - 30
+  - 33
   conditions:
     state: visible
-  confidence_threshold: 0.45
+  confidence_threshold: 0.70
   file: variants/pin_digit_8.png
   hsv_lower:
   - 0
-  - 0
-  - 0
+  - 150
+  - 50
   hsv_upper:
-  - 180
+  - 12
   - 255
-  - 255
+  - 160

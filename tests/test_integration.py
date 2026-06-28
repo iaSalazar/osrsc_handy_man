@@ -33,7 +33,7 @@ class TestFullPipeline:
             keyboard = KeyboardEmulator(config.keyboard, rng, persona_typo_rate=0.01)
             logger = TelemetryLogger(Path(tmpdir), "test_integration")
 
-            from scenarios.chaos_altar_dragon_bones import ChaosAltarDragonBonesScenario
+            from scenarios.chaos_altar_synthetic import ChaosAltarDragonBonesScenario
 
             scenario = ChaosAltarDragonBonesScenario(
                 mouse=mouse, scanner=scanner, cognitive=cognitive,
@@ -97,7 +97,7 @@ class TestFullPipeline:
                                             persona_typo_rate=cognitive.persona.typo_rate)
                 logger = TelemetryLogger(Path(tmpdir), f"test_{persona_type.value}")
 
-                from scenarios.chaos_altar_dragon_bones import ChaosAltarDragonBonesScenario
+                from scenarios.chaos_altar_synthetic import ChaosAltarDragonBonesScenario
 
                 scenario = ChaosAltarDragonBonesScenario(
                     mouse=mouse, scanner=scanner, cognitive=cognitive,
