@@ -1,0 +1,104 @@
+# Cognitive parameters — phase timing, HMM transition matrices.
+#
+# Session phases model the typical human fatigue/performance curve
+# observed in sustained computer tasks:
+#
+#   Performance
+#   ^
+#   |   WARMUP   GROOVE      PLATEAU      FATIGUE
+#   |     /        \___________            \
+#   |    /                     \            \
+#   |   /                       \____________\____
+#   +-----------------------------------------------> time
+#   0    3 min    15 min        30 min       45+ min
+
+# Phase timing (seconds from session start)
+phases:
+  warmup_duration_s: 180.0       # 0–3 min: orienting, slow, error-prone
+  groove_duration_s: 720.0       # 3–15 min: peak performance
+  plateau_duration_s: 900.0      # 15–30 min: steady, slight decline
+  fatigue_onset_s: 1800.0        # 30+ min: noticeable decline
+  micro_break_interval_s: [120.0, 300.0]   # every 2–5 minutes during plateau+
+  micro_break_duration_s: [3.0, 8.0]      # short pauses
+  recovery_duration_s: [30.0, 60.0]       # post micro-break recovery
+
+# Phase multipliers on reaction time (1.0 = baseline GROOVE)
+phase_rt_multipliers:
+  WARMUP: 1.25      # 25% slower during warmup
+  GROOVE: 1.0        # baseline
+  PLATEAU: 1.05      # slight slowdown
+  MICRO_BREAK: 2.0   # effectively paused
+  FATIGUE: 1.35      # 35% slower when fatigued
+  RECOVERY: 1.10     # recovering but not yet at peak
+
+# Phase multipliers on tremor amplitude
+phase_tremor_multipliers:
+  WARMUP: 1.1
+  GROOVE: 1.0
+  PLATEAU: 1.0
+  MICRO_BREAK: 0.5   # hands off device
+  FATIGUE: 2.0        # significantly more tremor when tired
+  RECOVERY: 1.2
+
+# Phase multipliers on error rate
+phase_error_multipliers:
+  WARMUP: 1.3
+  GROOVE: 1.0
+  PLATEAU: 1.1
+  MICRO_BREAK: 0.0
+  FATIGUE: 2.0        # twice as error-prone when fatigued
+  RECOVERY: 1.15
+
+# Affective HMM — default 5×5 transition matrix.
+# Rows: FROM state, Columns: TO state.
+# Order: NEUTRAL, FOCUSED, BORED, FRUSTRATED, RUSHING
+hmm_default:
+  neutral:     [0.70, 0.15, 0.08, 0.04, 0.03]
+  focused:     [0.05, 0.80, 0.05, 0.05, 0.05]
+  bored:       [0.10, 0.10, 0.65, 0.10, 0.05]
+  frustrated:  [0.05, 0.10, 0.10, 0.65, 0.10]
+  rushing:     [0.15, 0.10, 0.05, 0.10, 0.60]
+
+# Persona-specific HMM matrices (override default)
+persona_hmm:
+  fast_accurate:
+    neutral:     [0.60, 0.25, 0.05, 0.05, 0.05]
+    focused:     [0.03, 0.85, 0.02, 0.05, 0.05]
+    bored:       [0.10, 0.15, 0.55, 0.10, 0.10]
+    frustrated:  [0.05, 0.15, 0.05, 0.60, 0.15]
+    rushing:     [0.05, 0.15, 0.05, 0.10, 0.65]
+  slow_methodical:
+    neutral:     [0.75, 0.10, 0.10, 0.03, 0.02]
+    focused:     [0.05, 0.82, 0.08, 0.03, 0.02]
+    bored:       [0.15, 0.05, 0.70, 0.05, 0.05]
+    frustrated:  [0.10, 0.05, 0.10, 0.70, 0.05]
+    rushing:     [0.20, 0.10, 0.05, 0.10, 0.55]
+  distracted_error_prone:
+    neutral:     [0.55, 0.10, 0.15, 0.10, 0.10]
+    focused:     [0.15, 0.55, 0.10, 0.10, 0.10]
+    bored:       [0.10, 0.05, 0.50, 0.15, 0.20]
+    frustrated:  [0.05, 0.05, 0.15, 0.50, 0.25]
+    rushing:     [0.10, 0.05, 0.10, 0.15, 0.60]
+
+# Affective state modifiers on behavior
+affect_modifiers:
+  NEUTRAL:
+    rt_multiplier: 1.0
+    error_multiplier: 1.0
+    distracter_multiplier: 1.0
+  FOCUSED:
+    rt_multiplier: 0.85
+    error_multiplier: 0.7
+    distracter_multiplier: 0.5
+  BORED:
+    rt_multiplier: 1.2
+    error_multiplier: 1.1
+    distracter_multiplier: 1.5
+  FRUSTRATED:
+    rt_multiplier: 0.9        # rushing, but making errors
+    error_multiplier: 2.0
+    distracter_multiplier: 0.8
+  RUSHING:
+    rt_multiplier: 0.75
+    error_multiplier: 2.5
+    distracter_multiplier: 0.4

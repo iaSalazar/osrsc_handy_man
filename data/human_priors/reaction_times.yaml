@@ -1,0 +1,69 @@
+# Ex-Wald reaction time distribution parameters per persona.
+#
+# The Ex-Wald models RT as:
+#   RT = Wald(mu, sigma) + Exponential(lambda)
+#
+# Wald (inverse Gaussian): models the decision + motor preparation time.
+# Exponential tail: models rare long delays (distraction, hesitation).
+#
+# Values derived from published HCI literature and behavioral biometrics research:
+# - Card, Moran & Newell (1983) — Model Human Processor
+# - Fitts (1954) — information capacity of human motor system
+# - Zhai et al. (2004) — human cursor control models
+
+fast_accurate:
+  persona_type: fast_accurate
+  exwald:
+    mu: 180.0       # ms — fast decision-making
+    sigma: 30.0     # low variability
+    lambda: 0.02    # rare long tails
+  hold_time_ms:
+    mean: 90.0
+    std: 10.0
+  hold_time_min_ms: 55.0
+  typo_rate: 0.008
+  micro_break_frequency_per_min: 0.3
+  fatigue_rt_multiplier: 1.10
+  distracter_probability: 0.08
+  misclick_rate: 0.015
+  tremor_amplitude_scale: 0.8
+  camera_rotation_frequency: 0.10
+  afk_probability_per_minute: 0.01
+
+slow_methodical:
+  persona_type: slow_methodical
+  exwald:
+    mu: 350.0       # ms — careful decision-making
+    sigma: 60.0     # moderate variability
+    lambda: 0.008   # very rare long tails (focused)
+  hold_time_ms:
+    mean: 120.0
+    std: 20.0
+  hold_time_min_ms: 70.0
+  typo_rate: 0.005   # very accurate
+  micro_break_frequency_per_min: 0.5
+  fatigue_rt_multiplier: 1.05
+  distracter_probability: 0.05
+  misclick_rate: 0.01
+  tremor_amplitude_scale: 1.2   # slightly more tremor (older/more deliberate)
+  camera_rotation_frequency: 0.20   # adjusts camera more often
+  afk_probability_per_minute: 0.03
+
+distracted_error_prone:
+  persona_type: distracted_error_prone
+  exwald:
+    mu: 250.0       # ms — moderate speed but high variability
+    sigma: 80.0     # high variability
+    lambda: 0.03    # frequent long tails (distractions)
+  hold_time_ms:
+    mean: 100.0
+    std: 25.0
+  hold_time_min_ms: 50.0
+  typo_rate: 0.03    # makes frequent errors
+  micro_break_frequency_per_min: 0.8
+  fatigue_rt_multiplier: 1.30   # deteriorates significantly with fatigue
+  distracter_probability: 0.25   # highly distractible
+  misclick_rate: 0.05
+  tremor_amplitude_scale: 1.5   # amplified tremor (stress/caffeine)
+  camera_rotation_frequency: 0.25
+  afk_probability_per_minute: 0.05   # checks phone often

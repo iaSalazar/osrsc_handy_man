@@ -1,0 +1,42 @@
+# Real-world interruption parameters.
+#
+# Models common desktop interruptions:
+#   CURSOR_FREEZE — user checks phone / reads something (cursor stops 2–15s)
+#   GAZE_DRIFT — cursor drifts to screen edge as if checking notification (1–3s)
+#   KEYSTROKE_BURST — user replies to a message (3–20 keystrokes, 5–30s)
+#
+# After an interruption, the model performs a visual re-orientation scan
+# (2–4 quick fixations across the UI) before resuming the task.
+
+# Base interruption rate per minute (varies by persona + phase)
+base_rate_per_minute: 0.15
+
+# Interruption type distribution (must sum to 1.0)
+type_distribution:
+  cursor_freeze: 0.40
+  gaze_drift: 0.35
+  keystroke_burst: 0.25
+
+# Duration ranges per type
+cursor_freeze_duration_s: [2.0, 15.0]
+gaze_drift_duration_s: [1.0, 3.0]
+keystroke_burst_keys: [3, 20]
+keystroke_burst_duration_s: [5.0, 30.0]
+
+# Re-orientation scan after interruption
+reorientation_scan_fixations: [2, 4]
+reorientation_scan_duration_ms: [200.0, 500.0]   # per fixation
+
+# Persona multipliers on base rate
+persona_rate_multipliers:
+  fast_accurate: 0.6
+  slow_methodical: 0.8
+  distracted_error_prone: 2.0
+
+# Phase multipliers on interruption rate
+phase_rate_multipliers:
+  WARMUP: 0.5
+  GROOVE: 0.3
+  PLATEAU: 0.6
+  FATIGUE: 1.5     # more interruptions when tired (losing focus)
+  RECOVERY: 0.8

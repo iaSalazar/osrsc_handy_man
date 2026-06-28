@@ -1,0 +1,40 @@
+# Physiological tremor profiles.
+#
+# Healthy humans exhibit postural tremor in two bands:
+#   8–12 Hz  — physiological tremor (stretch reflex loop, mechanical resonance)
+#   20–40 Hz — enhanced physiological tremor (CNS drive, motor unit synchronization)
+#
+# Amplitude at fingertip: ~50–100 μm → ~1–3 px at 96 DPI.
+# Amplitude increases with: fatigue, stress, caffeine, age.
+#
+# References:
+# - Elble & Randall (1976) — mechanistic components of normal tremor
+# - Silphe calibration game defaults
+
+# Band 1: physiological (8–12 Hz)
+band1:
+  hz_min: 8.0
+  hz_max: 12.0
+  amplitude_px: 1.2       # at 96 DPI, ~50 μm equivalent
+
+# Band 2: enhanced physiological (20–40 Hz)
+band2:
+  hz_min: 20.0
+  hz_max: 40.0
+  amplitude_px: 0.4       # smaller amplitude, higher frequency
+
+# White noise floor — models digitizer noise + micro-tremor
+gaussian_noise_std: 0.3
+
+# Amplitude modulation — slow variation of tremor intensity (0.5–1.5 Hz)
+# Simulates changing muscle tension
+amplitude_modulation_hz: [0.5, 1.5]
+
+# Persona-specific amplitude scalars (multipliers on base amplitudes):
+persona_scales:
+  fast_accurate: 0.8
+  slow_methodical: 1.2
+  distracted_error_prone: 1.5
+
+# Fatigue multiplier: tremor amplitude scales by this factor at peak fatigue
+fatigue_multiplier: 2.0

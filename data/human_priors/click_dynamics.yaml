@@ -1,0 +1,27 @@
+# Click dynamics — timing and mechanical parameters.
+#
+# Sources:
+# - Akamai/DataDome behavioral biometrics analysis
+# - Pydoll mouse humanization defaults
+# - Pointergeist PHC sigma log-normal calibration
+
+# Hold time: time between mouse-down and mouse-up.
+# Log-normal with these approximate moments:
+hold_time_mean_ms: 95.0
+hold_time_std_ms: 15.0
+hold_time_min_ms: 50.0
+
+# Micro-drift: small cursor displacement during the hold phase.
+# Real fingers don't press perfectly vertically — the cursor slides 1-5 px.
+micro_drift_probability: 0.03
+micro_drift_px: 2.5
+
+# Double-click inter-click interval (between first click release and second click press).
+double_click_interval_ms: [60.0, 140.0]
+
+# Release asymmetry: how much the cursor moves during release vs press.
+# >0 means release causes more drift; 0 means symmetric.
+release_asymmetry: 0.3
+
+# Pre-click stabilization pause (ms) — cursor briefly stops before clicking.
+pre_click_pause_ms: [20.0, 60.0]

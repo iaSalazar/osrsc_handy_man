@@ -1,0 +1,20 @@
+id: bank_menu_option
+label: Bank Menu Option
+variants:
+- bbox:
+  - 0
+  - 0
+  - 40
+  - 20
+  conditions:
+    state: visible
+  confidence_threshold: 0.5
+  file: variants/bank_option.png
+  hsv_lower:
+  - 0
+  - 0
+  - 0
+  hsv_upper:
+  - 180
+  - 255
+  - 255

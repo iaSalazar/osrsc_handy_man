@@ -1,0 +1,40 @@
+# Inter-key delay distributions — two-component log-normal mixture.
+#
+# Component 1 (fast): touch-typing bursts — trained typists producing
+# common sequences (trigrams, bigrams) at high speed.
+# Typical range: 80–200 ms inter-key.
+#
+# Component 2 (slow): transitions between hands, uncommon key pairs,
+# or hunt-and-peck searching.
+# Typical range: 300–900 ms inter-key.
+#
+# References:
+# - Gentner et al. (1983) — keystroke timing in transcription typing
+# - Card, Moran & Newell (1983) — Model Human Processor
+
+# Global defaults
+component_weights: [0.65, 0.35]   # 65% fast bursts, 35% slow transitions
+component_means_ms: [140.0, 450.0]  # log-space means
+component_stds_ms: [40.0, 150.0]    # log-space std devs
+
+# Trigrams — common three-key sequences with chunked timing.
+# Each entry: [keys, mean_delay_ms, std_delay_ms]
+common_trigrams:
+  - [["t", "h", "e"], 80.0, 20.0]
+  - [["i", "n", "g"], 75.0, 18.0]
+  - [["a", "n", "d"], 85.0, 22.0]
+  - [["i", "o", "n"], 90.0, 25.0]
+  - [["e", "n", "t"], 85.0, 20.0]
+  - [["f", "o", "r"], 80.0, 18.0]
+
+# Persona-specific overrides:
+persona_overrides:
+  fast_accurate:
+    component_weights: [0.85, 0.15]
+    component_means_ms: [120.0, 350.0]
+  slow_methodical:
+    component_weights: [0.50, 0.50]
+    component_means_ms: [180.0, 550.0]
+  distracted_error_prone:
+    component_weights: [0.60, 0.40]
+    component_means_ms: [150.0, 420.0]

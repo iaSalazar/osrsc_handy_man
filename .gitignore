@@ -1,0 +1,21 @@
+
+# secrets
+.env
+.env.local
+.deepseek_key
+
+# virtual environment
+.venv/
+
+# output data
+output/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# IDE
+.vscode/
+.idea/

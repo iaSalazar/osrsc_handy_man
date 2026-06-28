@@ -1,0 +1,20 @@
+id: bank_close_button
+label: bank_close_button
+variants:
+- bbox:
+  - 0
+  - 0
+  - 40
+  - 20
+  conditions:
+    state: visible
+  confidence_threshold: 0.5
+  file: variants/bank_close_buttom.png
+  hsv_lower:
+  - 0
+  - 0
+  - 0
+  hsv_upper:
+  - 180
+  - 255
+  - 255

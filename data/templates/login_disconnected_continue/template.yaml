@@ -1,0 +1,20 @@
+id: login_disconnected_continue
+label: Login Disconnected Continue
+variants:
+- bbox:
+  - 0
+  - 0
+  - 40
+  - 40
+  conditions:
+    state: visible
+  confidence_threshold: 0.45
+  file: variants/disconnected_ok_button.png
+  hsv_lower:
+  - 0
+  - 0
+  - 0
+  hsv_upper:
+  - 180
+  - 255
+  - 255

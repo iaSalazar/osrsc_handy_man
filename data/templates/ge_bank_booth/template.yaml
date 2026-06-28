@@ -1,0 +1,20 @@
+id: ge_bank_booth
+label: GE Bank Booth
+variants:
+- bbox:
+  - 881
+  - 266
+  - 70
+  - 68
+  conditions:
+    state: visible
+  confidence_threshold: 0.35
+  file: variants/banker_1.png
+  hsv_lower:
+  - 0
+  - 0
+  - 0
+  hsv_upper:
+  - 180
+  - 255
+  - 255
